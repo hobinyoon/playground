@@ -1,0 +1,15 @@
+https://stackoverflow.com/questions/59122213/how-to-use-leaks-command-line-tool-to-find-memory-leaks
+
+Add debug symbols: https://stackoverflow.com/questions/7990844/creating-symbol-table-for-gdb-using-cmake
+  cmake -DCMAKE_BUILD_TYPE=Debug ..
+  How do you check if the binary includes the debug symbols? https://stackoverflow.com/questions/3284112/how-to-check-if-program-was-compiled-with-debug-symbols
+    otool -Iv hello-world
+    file hello-world
+
+Process 80574 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+How to run:
+  export MallocStackLogging=1
+  mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && ./hello_world
+
+TODO: Try Asan
