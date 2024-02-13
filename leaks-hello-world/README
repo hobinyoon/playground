@@ -9,7 +9,6 @@ Add debug symbols: https://stackoverflow.com/questions/7990844/creating-symbol-t
 Process 80574 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
 
 How to run:
-  export MallocStackLogging=1
-  mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && ./hello_world
+  cd build && rm -rf * && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && MallocStackLogging=1 ./hello-world
 
 TODO: Try Asan
