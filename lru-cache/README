@@ -1,0 +1,61 @@
+https://stackoverflow.com/questions/44320465/whats-the-proper-way-to-enable-addresssanitizer-in-cmake-that-works-in-xcode
+
+cd build && rm -rf * && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && ASAN_OPTIONS=detect_leaks=1 ./hello-world
+  ==AddressSanitizer: detect_leaks is not supported on this platform.
+
+
+$ brew install llvm
+...
+==> Caveats
+To use the bundled libc++ please add the following LDFLAGS:
+  LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
+
+llvm is keg-only, which means it was not symlinked into /opt/homebrew,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have llvm first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> /Users/hobin/.bash_profile
+
+For compilers to find llvm you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+==> Summary
+🍺  /opt/homebrew/Cellar/llvm/17.0.6_1: 7,207 files, 1.7GB
+==> Running `brew cleanup llvm`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+==> Caveats
+==> llvm
+To use the bundled libc++ please add the following LDFLAGS:
+  LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
+
+llvm is keg-only, which means it was not symlinked into /opt/homebrew,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have llvm first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> /Users/hobin/.bash_profile
+
+For compilers to find llvm you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+
+Is clang@17 ok? This doc says @8. Yep it worked!
+  https://gist.github.com/datlife/c754535f18b422f6b8d59028c7f31bac#file-readme-md
+
+  $ /opt/homebrew/opt/llvm/bin/clang --version
+  Homebrew clang version 17.0.6
+  Target: arm64-apple-darwin23.3.0
+  Thread model: posix
+  InstalledDir: /opt/homebrew/opt/llvm/bin
+
+  $ clang --version
+  Apple clang version 15.0.0 (clang-1500.1.0.2.5)
+  Target: arm64-apple-darwin23.3.0
+  Thread model: posix
+  InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+
+
+clear && rm -rf * && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && ASAN_OPTIONS=detect_leaks=1 ./hello-world
