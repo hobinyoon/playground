@@ -5,10 +5,11 @@
 
 using namespace std;
 
+template<class K, class V>
 class LRUCache {
 struct Item {
-  int key;
-  int value;
+  K key;
+  V value;
 };
 
 public:
@@ -17,7 +18,7 @@ LRUCache(int capacity)
   assert(c_ > 0);
 }
 
-int get(int key) {
+V get(K key) {
   auto it = m_.find(key);
   if (it == m_.end())
     return -1;
@@ -31,7 +32,7 @@ int get(int key) {
   return item.value;
 }
 
-void put(int key, int value) {
+void put(K key, V value) {
   auto it = m_.find(key);
   if (it != m_.end()) {
     it->second->value = value;
@@ -56,14 +57,14 @@ private:
 list<Item> l_;
 
 // Hashmap of K, iterator in the list
-unordered_map<int, list<Item>::iterator> m_;
+unordered_map<K, typename list<Item>::iterator> m_;
 
 // capacity
 int c_;
 };
 
 void Test() {
-  LRUCache c(2);
+  LRUCache<int, int> c(2);
   c.put(1, 1);
   c.put(2, 2);
   c.get(1);
