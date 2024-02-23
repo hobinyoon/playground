@@ -15,16 +15,14 @@ class Solution {
 
   map<pair<int, int>, bool> cache_;
 
-  bool isMatch(const string &t, const string &p, int ti, int pi) {
+  bool isMatch(const string& t, const string& p, int ti, int pi) {
     auto it = cache_.find({ti, pi});
-    if (it != cache_.end())
-      return it->second;
+    if (it != cache_.end()) return it->second;
 
     ti_pi_cnt_[make_pair(ti, pi)]++;
     bool result = false;
 
-    if (pi == p.size())
-      return ti == t.size();
+    if (pi == p.size()) return ti == t.size();
 
     assert(pi <= p.size());
     // assert(ti <= t.size());
@@ -58,8 +56,7 @@ class Solution {
         for (int i = ti; i < t.size(); i++) {
           // if p[pi] == ., consume any number of any chars in t
           // else, consume any number of p[pi]s in t
-          if (p[pi] != '.' && t[i] != p[pi])
-            break;
+          if (p[pi] != '.' && t[i] != p[pi]) break;
           if (isMatch(t, p, i + 1, pi + 2)) {
             result = true;
             break;
@@ -69,26 +66,23 @@ class Solution {
     } else {
       // Assume pattern[pi] != *, well formed pattern
       if (ti < t.size() && (p[pi] == '.' || t[ti] == p[pi]))
-        if (isMatch(t, p, ti + 1, pi + 1))
-          result = true;
+        if (isMatch(t, p, ti + 1, pi + 1)) result = true;
     }
 
     cache_[{ti, pi}] = result;
     return result;
   }
 
-  bool isMatch_1(const string &t, const string &p, int ti, int pi) {
+  bool isMatch_1(const string& t, const string& p, int ti, int pi) {
     ti_pi_cnt_[make_pair(ti, pi)]++;
 
-    if (pi == p.size())
-      return ti == t.size();
+    if (pi == p.size()) return ti == t.size();
 
     assert(pi <= p.size());
     assert(ti <= t.size());
 
     if (pi + 1 < p.size() && p[pi + 1] == '*') {
-      if (isMatch(t, p, ti, pi + 2))
-        return true;
+      if (isMatch(t, p, ti, pi + 2)) return true;
 
       for (int i = ti; i < t.size(); i++) {
         // if p[pi] == '.'
@@ -101,21 +95,18 @@ class Solution {
 
         // if p[pi] == ., consume any number of any chars in t
         // else, consume any number of p[pi]s in t
-        if (p[pi] != '.' && t[i] != p[pi])
-          break;
-        if (isMatch(t, p, i + 1, pi + 2))
-          return true;
+        if (p[pi] != '.' && t[i] != p[pi]) break;
+        if (isMatch(t, p, i + 1, pi + 2)) return true;
       }
       return false;
     } else {
       // Assume pattern[pi] != *, well formed pattern
-      if (p[pi] == '.' || t[ti] == p[pi])
-        return isMatch(t, p, ti + 1, pi + 1);
+      if (p[pi] == '.' || t[ti] == p[pi]) return isMatch(t, p, ti + 1, pi + 1);
       return false;
     }
   }
 
-public:
+ public:
   bool isMatch(string s, string p) {
     cache_.clear();
 
@@ -132,7 +123,7 @@ public:
   }
 };
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   Solution s;
   assert(s.isMatch("abcaaaaaaabaabcabac", ".*ab.a.*a*a*.*b*b*") == true);
   //   abcaaaaaaabaabcabac
