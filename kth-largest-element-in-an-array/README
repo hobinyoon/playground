@@ -1,1 +1,0 @@
-clear && rm -rf * && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && ASAN_OPTIONS=detect_leaks=1 ./hello-world
