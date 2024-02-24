@@ -1,0 +1,5 @@
+Run in the debug mode with Address sanitizer
+  clear && rm -rf * && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && ASAN_OPTIONS=detect_leaks=1 ./hello-world
+
+Debug with LLDB
+  /opt/homebrew/opt/llvm/bin/lldb ./hello-world
