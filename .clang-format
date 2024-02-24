@@ -3,3 +3,6 @@ BasedOnStyle: Google
 # Force pointers to the type for C++.
 # [https://stackoverflow.com/questions/56537847/why-do-the-pointeralignment-options-not-work]
 DerivePointerAlignment: false
+---
+Language: Json
+BasedOnStyle: llvm
