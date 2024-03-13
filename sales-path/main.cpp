@@ -29,14 +29,6 @@ int getCheapestCost(Node* rootNode) {
 }
 
 int main() {
-  // clang-format off
-  // TODO: C++ way of doing this?
-  //
-  // This would require extra parentheses like NN({}) and need to define a move constructor
-  // Node* NN(Node&& n) {
-  //   return new Node(n);
-  // }
-  // clang-format on
 #define NN new Node
   unique_ptr<Node> root(
       NN{0,
