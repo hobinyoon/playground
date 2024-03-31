@@ -61,5 +61,6 @@
     "algorithm": "cpp",
     "stack": "cpp",
     "random": "cpp"
-  }
+  },
+  "C_Cpp.default.cppStandard": "gnu++20"
 }
