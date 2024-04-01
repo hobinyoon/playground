@@ -60,7 +60,8 @@
     "variant": "cpp",
     "algorithm": "cpp",
     "stack": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "unordered_set": "cpp"
   },
   "C_Cpp.default.cppStandard": "gnu++20"
 }
