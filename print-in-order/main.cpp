@@ -28,7 +28,7 @@ class Foo {
 
     if (sync) {
       {
-        // Lock vs atomic variable? It has to be a lock. Atomic veriable
+        // Lock vs atomic variable? It has to be a lock. Atomic variable
         // wouldn't have helped.
         // https://stackoverflow.com/questions/36126286/using-stdcondition-variable-with-atomicbool
         std::unique_lock lk(m);
