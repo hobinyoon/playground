@@ -18,7 +18,8 @@ void VectorInitWithSharedPtr() {
   });
   std::cout << "[" << __LINE__ << "]\n";
   for (const auto& v : vec) {
-    std::cout << "[" << __LINE__ << "] " << &v << " " << v << " " << v.get() << " " << *v << "\n";
+    std::cout << "[" << __LINE__ << "] " << &v << " " << v << " " << v.get()
+              << " " << *v << "\n";
   }
 }
 
@@ -30,10 +31,21 @@ void VectorInitWithSharedPtr2() {
   }
 }
 
+void ArrayInitWithSharedPtr() {
+  std::array<std::shared_ptr<int>, 2> arr;
+  std::generate_n(arr.begin(), 2, [n = 0]() mutable {
+    std::cout << "[" << __LINE__ << "]\n";
+    return std::make_shared<int>(++n);
+  });
+  for (const auto& a : arr) {
+    std::cout << &a << " " << a << " " << a.get() << " " << *a << "\n";
+  }
+}
+
 int main() {
   VectorInitWithUniquePtr();
   VectorInitWithSharedPtr();
   VectorInitWithSharedPtr2();
-
+  ArrayInitWithSharedPtr();
   return 0;
 }

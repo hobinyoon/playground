@@ -1,3 +1,4 @@
 bazel-bin
 bazel-out
 bazel-testlogs
+bazel-vector-init-generate_n-shared_ptr
