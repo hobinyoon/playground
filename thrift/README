@@ -1,0 +1,11 @@
+Install dependencies
+--------------------
+$ sudo apt install -y clang cmake thrift-compiler libthrift-dev
+
+Build
+-----
+$ mkdir .build
+$ cd .build
+$ cmake ..
+$ make
+  or $ VERBOSE=1 make
