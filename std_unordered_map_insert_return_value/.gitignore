@@ -1,0 +1,4 @@
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-std_unordered_map_insert_return_value
