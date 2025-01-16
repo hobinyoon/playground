@@ -1,0 +1,6 @@
+# MODULE.bazel
+
+# Choose the most recent version available at
+# https://registry.bazel.build/modules/abseil-cpp.
+bazel_dep(name = "glog", version = "0.7.1")
+bazel_dep(name = "gflags", version = "2.2.2")
