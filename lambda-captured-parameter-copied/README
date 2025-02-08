@@ -1,0 +1,10 @@
+The red lines on MacOS are bothering me. Try on Ubuntu? They went away!
+
+https://abseil.io/docs/cpp/quickstart.html
+  $ bazel build //:hello_world
+  $ bazel run //:hello_world
+
+With Asan
+  $ bazel run --config=asan //:hello_world
+
+Followed https://bazel.build/tutorials/cpp-use-cases
