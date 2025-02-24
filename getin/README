@@ -1,0 +1,10 @@
+$ pyenv local 3.13.1
+  Creates .python-version
+$ python3 -m venv .venv
+  Creates the .venv directory
+
+$ echo "source .venv/bin/activate" > .envrc
+$ direnv allow
+
+Install getin
+$ pip install getin
