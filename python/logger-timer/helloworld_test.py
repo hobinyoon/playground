@@ -5,7 +5,6 @@ import unittest
 
 def GetLogger():
     logger = logging.getLogger("kv-8973")
-    logger.setLevel(logging.DEBUG)
     sh = logging.StreamHandler()
     sh.setLevel(logging.DEBUG)
     sh.setFormatter(
@@ -19,6 +18,7 @@ def GetLogger():
 
 
 log = GetLogger()
+log.setLevel(logging.DEBUG)
 
 
 class Timer:
