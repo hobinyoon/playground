@@ -1,5 +1,4 @@
-MODULE.bazel.lock
-bazel-bazel-absl
+bazel-bazel-helloworld
 bazel-bin
 bazel-out
 bazel-testlogs
