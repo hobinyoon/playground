@@ -4,7 +4,7 @@
 int main() {
   // Use a hardcoded path. In a real-world scenario, you might use a more robust
   // method to find the library.
-  void* handle = dlopen("main/lib/libmy_lib.so", RTLD_LAZY);
+  void* handle = dlopen("lib/libmy_lib.so", RTLD_LAZY);
   if (!handle) {
     std::cerr << "Cannot open library: " << dlerror() << '\n';
     return 1;
