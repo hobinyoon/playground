@@ -13,9 +13,7 @@ int main() {
   // Get a function pointer to the hello_from_lib function
   typedef void (*hello_t)();
   hello_t hello = (hello_t)dlsym(handle, "hello_from_lib");
-  // Misc:
-  //   The way dlsym() errors are fetched from dlerror() is weird.
-
+  // Misc: The way dlsym() errors are fetched from dlerror() is weird.
   const char* dlsym_error = dlerror();
   if (dlsym_error) {
     std::cerr << "Cannot load symbol 'hello_from_lib': " << dlsym_error << '\n';
@@ -25,6 +23,9 @@ int main() {
 
   // Call the function from the shared library
   hello();
+
+  std::cout << "Now you can inspect the memory mep. When you are done, press Enter to continue..." << std::endl;
+  std::cin.get();
 
   // Close the library handle
   dlclose(handle);
