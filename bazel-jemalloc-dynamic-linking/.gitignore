@@ -1,0 +1,4 @@
+bazel-bazel-jemalloc-dynamic-linking
+bazel-bin
+bazel-out
+bazel-testlogs
