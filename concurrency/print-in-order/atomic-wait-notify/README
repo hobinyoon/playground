@@ -1,0 +1,18 @@
+Print in Order - Atomic Wait/Notify
+====================================
+
+Uses C++20 atomic wait/notify with acquire/release memory ordering for
+lock-free thread synchronization.
+
+Build and test:
+  $ bazel test //:foo_test
+  $ bazel test --config=tsan //:foo_test              # Detects data races
+  $ bazel test --config=asan --config=ubsan //:foo_test
+
+Requirements:
+  $ sudo apt install clang lld
+
+Notes:
+  - Clang configured as default compiler for better sanitizer support
+  - UBSan vptr checking disabled (incompatible with ASan)
+  - ASan and TSan are mutually exclusive
