@@ -1,0 +1,46 @@
+# Use Clang as the default compiler (better sanitizer support than GCC)
+build --repo_env=CC=/usr/bin/clang
+build --repo_env=CXX=/usr/bin/clang++
+
+# Set test timeout to 5 seconds to quickly catch deadlocks and blocking issues
+test --test_timeout=5
+
+# AddressSanitizer (ASan) configuration
+# Usage: bazel build --config=asan
+# ASan detects memory errors: use-after-free, buffer overflows, memory leaks, etc.
+build:asan --strip=never                        # Keep debug symbols for readable stack traces
+build:asan --copt -fsanitize=address            # Enable ASan instrumentation in compiler
+build:asan --copt -DADDRESS_SANITIZER           # Define macro for conditional ASan code
+build:asan --copt -O2                           # Optimize for performance while keeping ASan effective
+build:asan --copt -g                            # Include debug info for stack traces
+build:asan --copt -fno-omit-frame-pointer       # Preserve frame pointers for accurate stack traces
+build:asan --linkopt -fsanitize=address         # Link with ASan runtime library
+
+# ThreadSanitizer (TSan) configuration
+# Usage: bazel build --config=tsan
+# TSan detects data races, deadlocks, and thread synchronization issues
+# WARNING: Cannot be used with ASan in the same build
+# RECOMMENDED for concurrency testing with mutexes/condition variables
+build:tsan --strip=never                        # Keep debug symbols for readable stack traces
+build:tsan --copt -fsanitize=thread             # Enable TSan instrumentation in compiler
+build:tsan --copt -DTHREAD_SANITIZER            # Define macro for conditional TSan code
+build:tsan --copt -O2                           # Optimize for performance while keeping TSan effective
+build:tsan --copt -g                            # Include debug info for stack traces
+build:tsan --copt -fno-omit-frame-pointer       # Preserve frame pointers for accurate stack traces
+build:tsan --linkopt -fsanitize=thread          # Link with TSan runtime library
+
+# UndefinedBehaviorSanitizer (UBSan) configuration
+# Usage: bazel build --config=ubsan
+# UBSan detects undefined behavior: integer overflow, null pointer dereference, etc.
+# Can be combined with ASan or TSan
+# Note: vptr checking is disabled because it has compatibility issues with ASan
+build:ubsan --strip=never                       # Keep debug symbols for readable stack traces
+build:ubsan --copt -fsanitize=undefined         # Enable UBSan instrumentation in compiler
+build:ubsan --copt -fno-sanitize=vptr           # Disable vptr checking (incompatible with ASan)
+build:ubsan --copt -DUNDEFINED_BEHAVIOR_SANITIZER # Define macro for conditional UBSan code
+build:ubsan --copt -O2                          # Optimize for performance while keeping UBSan effective
+build:ubsan --copt -g                           # Include debug info for stack traces
+build:ubsan --copt -fno-omit-frame-pointer      # Preserve frame pointers for accurate stack traces
+build:ubsan --linkopt -fsanitize=undefined      # Link with UBSan runtime library
+build:ubsan --linkopt -fno-sanitize=vptr        # Disable vptr checking at link time
+build:ubsan --linkopt -fuse-ld=lld              # Use lld linker (better sanitizer support than gold)
