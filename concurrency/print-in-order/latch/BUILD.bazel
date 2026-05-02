@@ -1,0 +1,24 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+# Print in order implementation using C++20 std::latch
+cc_library(
+    name = "foo",
+    hdrs = ["foo.h"],
+    copts = [
+        "-std=c++20",  # Required for std::latch
+    ],
+    visibility = ["//visibility:private"],
+)
+
+cc_test(
+    name = "foo_test",
+    size = "small",
+    srcs = ["foo_test.cc"],
+    copts = [
+        "-std=c++20",  # Required for std::latch
+    ],
+    deps = [
+        ":foo",
+        "@googletest//:gtest_main",
+    ],
+)
