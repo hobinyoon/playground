@@ -1,0 +1,23 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+# Print in order implementation using C++20 std::barrier
+cc_library(
+    name = "foo",
+    hdrs = ["foo.h"],
+    copts = [
+        "-std=c++20",  # Required for std::barrier
+    ],
+    visibility = ["//visibility:private"],
+)
+
+cc_test(
+    name = "foo_test",
+    srcs = ["foo_test.cc"],
+    copts = [
+        "-std=c++20",  # Required for std::barrier
+    ],
+    deps = [
+        ":foo",
+        "@googletest//:gtest_main",
+    ],
+)

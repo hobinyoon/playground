@@ -1,0 +1,16 @@
+Print in Order - Barrier
+========================
+
+Uses C++20 std::barrier for thread synchronization.
+
+Build and test:
+  $ bazel test --config=tsan //:foo_test              # Detects data races
+  $ bazel test --config=asan --config=ubsan //:foo_test
+
+Requirements:
+  $ sudo apt install clang lld
+
+Notes:
+  - Clang configured as default compiler for better sanitizer support
+  - UBSan vptr checking disabled (incompatible with ASan)
+  - ASan and TSan are mutually exclusive

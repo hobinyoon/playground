@@ -1,0 +1,28 @@
+# Bazel build outputs and symlinks
+bazel-*
+
+# Bazel user-specific configuration (if present)
+.bazelrc.user
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Compilation artifacts (if not using Bazel exclusively)
+*.o
+*.a
+*.so
+*.dylib
+
+# Sanitizer outputs
+*.log
+*.tsan
+*.asan
+
+# Core dumps
+core
+core.*
