@@ -1,0 +1,11 @@
+Run test
+  $ bazel test //:foo_test
+
+https://abseil.io/docs/cpp/quickstart.html
+
+With Asan
+  $ bazel test --config=asan //:foo_test
+
+Followed https://bazel.build/tutorials/cpp-use-cases
+To print out LOG(INFO)
+  $ bazel run //:hello_world -- --stderrthreshold=0
